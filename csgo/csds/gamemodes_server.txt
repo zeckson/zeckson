@@ -10,13 +10,12 @@
 "competitive"{
 
 		
-		"maxplayers"		"11"			// Note that maxplayers doesn't go in the convar block.
+		"maxplayers"		"10"			// Note that maxplayers doesn't go in the convar block.
 											// Another way to set maxplayers is to add -maxplayers_override XX to the cmd line.
 		"exec"
 		{
 											// Any config files listed here will be executed after the ones in gamemodes.txt.
-			
-			"exec"					"server_last.cfg" 
+			"exec"					"server.cfg"
 		}
 
 		"mapgroupsMP"						// List of mapgroups valid for this game mode ( competitive )
@@ -33,11 +32,11 @@
 
 
 
-		"maxplayers"		"30"
+		"maxplayers"		"10"
 
 		"exec"
 		{
-			"exec"					"server_last.cfg"
+			"exec"					"server.cfg"
 		}
 
 		"mapgroupsMP"						// List of mapgroups valid for this game mode ( casual )
@@ -61,7 +60,7 @@
 		// These are the configs that get executed when a game mode of this type is created
 		"exec"
 		{
-			"exec"					"server_last.cfg"
+			"exec"					"server.cfg"
 		}
 					
 		"mapgroupsMP"
@@ -97,7 +96,7 @@
 		// These are the configs that get executed when a game mode of this type is created
 		"exec"
 		{
-			"exec"					"server_last.cfg"
+			"exec"					"server.cfg"
 		}
 
 		"mapgroupsMP"
@@ -149,12 +148,11 @@
 			"name"			"mg_bomb_se"
 			"maps"
 			{
-				"de_dust_se"		""
-				"de_dust2_se"		""
-				"de_nuke_se"		""
-				"de_train_se"		""
-				"de_inferno_se"		""
-				"de_aztec_se"		""
+				"de_dust"		""
+				"de_dust2"		""
+				"de_nuke"		""
+				"de_train"		""
+				"de_inferno"		""
 			}
 		}
 	}
