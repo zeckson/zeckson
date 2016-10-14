@@ -81,7 +81,7 @@
 			"awp"			{ "kills"	"5" }
 			"knifegg"		{ "kills"	"1" }
 		}
-
+}
 
 
 /////////////////////////////////////////
@@ -119,7 +119,32 @@
 		}
 
 
-}}}}
+}
+
+/////////////////////////////////////////
+// DEATHMATCH
+/////////////////////////////////////////
+"deathmatch"
+{
+
+
+		"maxplayers"			"10"
+
+		// These are the configs that get executed when a game mode of this type is created
+		"exec"
+		{
+			"exec"					"server.cfg"
+			"mp_teammates_are_enemies"	"1"
+		}
+
+		"mapgroupsMP"
+		{
+			"mg_deathmatch"		""
+		}
+
+}
+
+}}}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Map groups
