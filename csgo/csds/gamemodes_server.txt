@@ -132,7 +132,6 @@
 		"exec"
 		{
 			"exec"					"server.cfg"
-			"mp_teammates_are_enemies"	"1"
 		}
 
 		"mapgroupsMP"
