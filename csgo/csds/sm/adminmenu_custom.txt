@@ -342,7 +342,7 @@
 		{
 			"admin"		"sm_ban"
 			"execute"	"server"
-			"cmd"		"#1; changelevel #2"
+			"cmd"		"#1;changelevel #2"
         			"1"
         			{
         				"type" 		"list"
