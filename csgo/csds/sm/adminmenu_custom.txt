@@ -368,19 +368,15 @@
 	"Server Cvars"
 	{
 		"admin"		"sm_ban"
-		"Password"
+		"Headshot Only"
 		{
-			"cmd"		"sv_password #1"
+			"cmd"		"sm_onlyhs_enable #1"
 			"admin"		"sm_ban"
 			"execute"	"server"
 			"1"
 			{
-				"type" 		"list"
-				"title"		"Password:"
-				"1"		"teamuescrim"
-				"2"		"jello"
-				"3"		"pickels"
-				"4"		"dildo"
+				"type" 		"onoff"
+				"title"		"Headshot Only:"
 			}
 		}
 		"Deadtalk"
