@@ -29,3 +29,6 @@
 *Add and share tag:*
 `git tag -a <tag name> -m "<commit message>"`
 `git push origin <tag name>`
+
+*GitHub pull requests as local branch*
+https://gist.github.com/piscisaureus/3342247
