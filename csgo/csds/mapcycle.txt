@@ -1,0 +1,6 @@
+aim_map
+de_dust2
+de_mirage
+de_inferno
+de_train
+de_nuke
