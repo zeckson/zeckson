@@ -2,3 +2,4 @@
 ```sh
 du -sch *
 ```
+#### Or use `ncdu`
