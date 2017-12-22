@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Settings active source — ac
+# Settings active source — as
 # Changing port number for #0 device — p 0 [1..3]
 
 
