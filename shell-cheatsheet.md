@@ -24,7 +24,7 @@ scp username@hostname:/path/to/remote/file /path/to/local/file
 ```
 or via cat:
 ```sh
- ssh host 'cat /path/on/remote' > /path/on/local
+ssh host 'cat /path/on/remote' > /path/on/local
  ```
 
 #### Detect file type
