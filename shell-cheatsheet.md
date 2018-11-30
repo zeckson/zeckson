@@ -26,3 +26,8 @@ or via cat:
 ```sh
  ssh host 'cat /path/on/remote' > /path/on/local
  ```
+
+#### Detect file type
+```sh
+file <path>
+```
