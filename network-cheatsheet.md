@@ -8,5 +8,12 @@ nmap -A -T4 192.168.1.*
 Best for link-2-link debugging https://en.wikipedia.org/wiki/Link-local_address
 
 ```sh 
-sudo tcpdump arp
+tcpdump arp
+```
+
+### Look for an open ports and connection
+Best for finding out binded ports by processes
+
+```shell script
+netstat -peanut
 ```

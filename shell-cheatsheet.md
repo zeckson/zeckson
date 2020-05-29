@@ -1,4 +1,4 @@
-### Print subdir usage:
+### Print subdir disk usage:
 ```sh
 du -sch *
 ```
@@ -30,4 +30,9 @@ ssh host 'cat /path/on/remote' > /path/on/local
 #### Detect file type
 ```sh
 file <path>
+```
+
+#### Apply permission for user:group recursively
+```shell script
+chown -R <user>:<group> <dir>
 ```
