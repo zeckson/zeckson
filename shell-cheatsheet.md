@@ -36,3 +36,15 @@ file <path>
 ```shell script
 chown -R <user>:<group> <dir>
 ```
+
+#### Curl send form
+
+- To send form field
+```shell script
+curl -F'shorten=http://example.com/some/long/url' https://0x0.st
+```
+
+- To send file use `@` syntax:
+```shell script
+curl -F'file=@yourfile.png' https://0x0.st
+```
