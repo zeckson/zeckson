@@ -1,5 +1,11 @@
 ### Run bash on target container 
 
-```sh
-docker exec -it <containerIdOrName> bash
+```shell script
+docker run --rm --interactive --tty bash
+```
+
+### Run bash on target container and mount current dir to `/app` dir on volume
+
+```shell script
+docker run --rm --interactive --tty --volume $PWD:/app bash
 ```
