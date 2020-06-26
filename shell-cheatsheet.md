@@ -48,3 +48,8 @@ curl -F'shorten=http://example.com/some/long/url' https://0x0.st
 ```shell script
 curl -F'file=@yourfile.png' https://0x0.st
 ```
+
+#### Get the OS Version and Name
+```shell script
+uname -a
+```
