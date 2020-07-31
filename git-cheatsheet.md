@@ -9,8 +9,13 @@
 *Checkout and track remote branch:*
 `git checkout -t origin/<branch name>`
 
+*Merge branch into master:*
+`git checkout master`
+`git merge <branch name>`
+`git push`
+
 *Remove remote branch:*
-`git push origin  :<branch name>`
+`git push origin :<branch name>`
 
 *Sync local branches with remote:*
 `git remote prune origin`
