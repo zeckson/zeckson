@@ -1,10 +1,10 @@
 **Git Cheat Sheet**
 
 *Set up local branch:*
-`git checkout  -b  <branch name>`
+`git checkout -b  <branch name>`
 
 *Publish local branch:*
-`git push  -u origin <branch name>`
+`git push -u origin <branch name>`
 
 *Checkout and track remote branch:*
 `git checkout -t origin/<branch name>`
