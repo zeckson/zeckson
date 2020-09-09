@@ -49,6 +49,11 @@ git stash pop
 git branch | grep -E 'release-0.10-.*' | xargs git branch -d
 ```
 
+*Remove all merged branches:*
+```shell script
+git branch --merged | grep -v \* | xargs git branch -D 
+```
+
 *Add and share tag:*
 ```shell script
 git tag -a <tag name> -m "<commit message>"
