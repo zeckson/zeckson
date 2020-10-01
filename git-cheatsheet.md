@@ -51,7 +51,7 @@ git branch | grep -E 'release-0.10-.*' | xargs git branch -d
 
 *Remove all merged branches:*
 ```shell script
-git branch --merged | grep -v \* | xargs git branch -D 
+git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d 
 ```
 
 *Add and share tag:*
