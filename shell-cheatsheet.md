@@ -53,3 +53,8 @@ curl -F'file=@yourfile.png' https://0x0.st
 ```shell script
 uname -a
 ```
+
+#### Write image to disk
+```shell script
+dd if=image.img of=/dev/diskNUMBER bs=1m
+```
