@@ -7,3 +7,8 @@ kubectl exec $POD_NAME -n dev --stdin --tty -- /bin/bash
 ```shell
 export POD=$(kubectl -n dev get pods -l 'service.istio.io/canonical-name=#<label>' -o jsonpath='{.items[0].metadata.name}')
 ```
+
+### Restart deployemnt with name `#<name>`
+```shell
+kubectl rollout restart deployment #<name> -n dev
+```
