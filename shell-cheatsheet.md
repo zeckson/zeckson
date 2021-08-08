@@ -58,3 +58,8 @@ uname -a
 ```shell script
 dd if=image.img of=/dev/diskNUMBER bs=1m
 ```
+
+#### Create a soft-link to a target
+```shell
+ln -s <source> <target>
+```
