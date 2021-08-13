@@ -9,3 +9,8 @@ docker run --rm --interactive --tty bash
 ```shell script
 docker run --rm --interactive --tty --volume $PWD:/app bash
 ```
+
+### Build container with name `<name>`
+```shell script
+docker build -t <name> .
+```
