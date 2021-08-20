@@ -5,21 +5,20 @@ IFS=$'\n\t'
 # This script adds user $1 to system with ssh-key $2 if present
 USERNAME="$1"
 
+# Create User + Set Home Directory
+adduser -d /home/$USERNAME $USERNAME
+
+# Add User to sudo Group
+usermod -aG sudo $USERNAME
+
 # Create Home Directory + .ssh Directory
 mkdir -p /home/$USERNAME/.ssh
 
 # Create Authorized Keys File
 touch /home/$USERNAME/.ssh/authorized_keys
 
-# Create User + Set Home Directory
-useradd -d /home/$USERNAME $USERNAME
-
-# Add User to sudo Group
-usermod -aG sudo $USERNAME
-
 # Set Permissions
 chown -R $USERNAME:$USERNAME /home/$USERNAME/
-chown root:root /home/$USERNAME
 chmod 700 /home/$USERNAME/.ssh
 chmod 644 /home/$USERNAME/.ssh/authorized_keys
 
