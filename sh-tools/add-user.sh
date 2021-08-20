@@ -6,7 +6,7 @@ IFS=$'\n\t'
 USERNAME="$1"
 
 # Create User + Set Home Directory
-adduser -d /home/$USERNAME $USERNAME
+adduser $USERNAME
 
 # Require to change password on login
 passwd --expire $USERNAME
