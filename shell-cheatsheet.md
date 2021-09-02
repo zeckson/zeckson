@@ -63,3 +63,8 @@ dd if=image.img of=/dev/diskNUMBER bs=1m
 ```shell
 ln -s <source> <target>
 ```
+
+#### Find CRLF endings (check CRLF) `<target>`
+```shell
+grep -U $'\015' <target>
+```
