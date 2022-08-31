@@ -17,3 +17,9 @@ Best for finding out binded ports by processes
 ```shell script
 netstat -peanut
 ```
+
+### Port-forward with SSH
+
+```shell
+ssh -NL $local_port:$hostname:$hostport $ssh_server -v
+```
