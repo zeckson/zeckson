@@ -22,3 +22,8 @@ docker ps -a --filter volume=<volume>
 ```shell
 docker inspect --format='{{.Config.Volumes}}' <image>
 ```
+
+### Attach to running container `<name>`
+```shell
+docker container exec -it <name> /bin/bash
+```
