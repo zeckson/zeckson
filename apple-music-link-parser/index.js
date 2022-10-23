@@ -25,8 +25,10 @@ const load = async (link) => {
     return await result.text()
 }
 
+const print = console.log
+
 load(`https://music.apple.com/ru/album/concave/1452118070?i=1452118072`)
     .then(title)
     .then(clean)
-    .then((title) => console.log(title))
+    .then(print)
     .catch((e) => console.error(e))
