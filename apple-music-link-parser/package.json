@@ -1,0 +1,17 @@
+{
+  "name": "apple-music-link-parser",
+  "version": "1.0.0",
+  "description": "Apple Music Links Parser",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Evgenii Shchepotev",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "3.2.10",
+    "node-html-parser": "6.1.1"
+  }
+}
