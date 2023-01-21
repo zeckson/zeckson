@@ -68,3 +68,8 @@ ln -s <source> <target>
 ```shell
 grep -U $'\015' <target>
 ```
+
+#### Get DNS records
+```shell
+dig @8.8.8.8 a fishride.ru
+```
