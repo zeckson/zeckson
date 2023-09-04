@@ -1,0 +1,21 @@
+{
+  "name": "yanagotovila",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node build/bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "20.5.9",
+    "typescript": "5.2.2"
+  },
+  "dependencies": {
+    "grammy": "1.18.1"
+  }
+}
