@@ -112,21 +112,23 @@ case "$1" in
             exit 1
         fi
 
-        echo "🚀 Mode: PROXY (Opt-in)"
+        echo "🚀 Mode: PROXY ALL (Bypass exceptions)"
         echo "✅ Physical Gateway: $PHYS_GW"
         echo "✅ VPN Interface: $VPN_IF"
 
-        # 1. Force default route to Physical GW
-        sudo route change default "$PHYS_GW"
-        # Remove VPN overrides if present
-        sudo route -n delete 0.0.0.0/1 >/dev/null 2>&1
-        sudo route -n delete 128.0.0.0/1 >/dev/null 2>&1
-
-        # 2. Add routes via VPN
+        # 1. Set VPN as default gateway
         TARGET_ROUTE_GW="${VPN_DEST:-$VPN_IF}"
         FLAG=""
         [ -z "$VPN_DEST" ] && FLAG="-interface"
-        apply_routes_from_file "$PROXY_ROUTES" "$TARGET_ROUTE_GW" "$FLAG"
+
+        if [ -n "$FLAG" ]; then
+            sudo route change default -interface "$TARGET_ROUTE_GW"
+        else
+            sudo route change default "$TARGET_ROUTE_GW"
+        fi
+
+        # 2. Add bypass routes via Physical GW
+        apply_routes_from_file "$BYPASS_ROUTES" "$PHYS_GW" ""
 
         echo "✅ Done."
         ;;
@@ -138,16 +140,33 @@ case "$1" in
         fi
 
         PHYS_GW=$(get_physical_gw)
+        VPN_INFO=$(detect_vpn_if)
+        VPN_IF=$(echo "$VPN_INFO" | awk '{print $1}')
+        VPN_DEST=$(echo "$VPN_INFO" | awk '{print $2}')
+
         if [ -z "$PHYS_GW" ]; then
             echo "❌ Physical gateway not detected."
             exit 1
         fi
 
-        echo "🚀 Mode: BYPASS (Opt-out)"
+        echo "🚀 Mode: BYPASS ALL (Proxy exceptions)"
         echo "✅ Physical Gateway: $PHYS_GW"
 
-        # Add routes via Physical GW
-        apply_routes_from_file "$BYPASS_ROUTES" "$PHYS_GW" ""
+        # 1. Force default route to Physical GW
+        sudo route change default "$PHYS_GW"
+        # Remove VPN overrides if present (often added by OpenVPN/Tunnelblick)
+        sudo route -n delete 0.0.0.0/1 >/dev/null 2>&1
+        sudo route -n delete 128.0.0.0/1 >/dev/null 2>&1
+
+        # 2. Add proxy routes via VPN
+        if [ -n "$VPN_IF" ]; then
+            TARGET_ROUTE_GW="${VPN_DEST:-$VPN_IF}"
+            FLAG=""
+            [ -z "$VPN_DEST" ] && FLAG="-interface"
+            apply_routes_from_file "$PROXY_ROUTES" "$TARGET_ROUTE_GW" "$FLAG"
+        else
+             echo "⚠️ VPN interface not detected, skipping proxy exceptions."
+        fi
 
         echo "✅ Done."
         ;;
@@ -214,10 +233,20 @@ case "$1" in
 
         # Apply immediately if VPN is active and relevant
         if is_vpn_active; then
+            PHYS_GW=$(get_physical_gw)
+            VPN_INFO=$(detect_vpn_if)
+            VPN_IF=$(echo "$VPN_INFO" | awk '{print $1}')
+            VPN_DEST=$(echo "$VPN_INFO" | awk '{print $2}')
+
+            CUR_DEFAULT_IF=$(route -n get default 2>/dev/null | grep interface | awk '{print $2}')
+
+            # If current default is VPN, we only care about adding bypass routes
+            # If current default is Physical, we only care about adding proxy routes
+            # BUT the user might want to add a route and have it applied regardless of current mode?
+            # Actually, the logic should be: if we add to proxy list, apply it via VPN.
+            # If we add to bypass list, apply it via Physical GW.
+
             if [ "$MODE" = "proxy" ]; then
-                VPN_INFO=$(detect_vpn_if)
-                VPN_IF=$(echo "$VPN_INFO" | awk '{print $1}')
-                VPN_DEST=$(echo "$VPN_INFO" | awk '{print $2}')
                 if [ -n "$VPN_IF" ]; then
                     TARGET_GW="${VPN_DEST:-$VPN_IF}"
                     FLAG=""
@@ -225,7 +254,6 @@ case "$1" in
                     sudo route -n add "$IP" $FLAG "$TARGET_GW" >/dev/null 2>&1 && echo "🚀 Applied route via VPN."
                 fi
             else
-                PHYS_GW=$(get_physical_gw)
                 if [ -n "$PHYS_GW" ]; then
                     sudo route -n add "$IP" "$PHYS_GW" >/dev/null 2>&1 && echo "🚀 Applied route via Physical GW."
                 fi
@@ -240,8 +268,8 @@ case "$1" in
 
     *)
         echo "Usage: $0 {proxy|bypass|status|add|clear}"
-        echo "  proxy             Apply opt-in routing (only specific hosts via VPN)"
-        echo "  bypass            Apply opt-out routing (all via VPN except specific hosts)"
+        echo "  proxy             Everything via VPN, except bypass list"
+        echo "  bypass            Everything via Physical GW, except proxy list"
         echo "  status            Show current tunnel and routing status"
         echo "  add <mode> <host> Add a host to proxy or bypass list"
         echo "  clear             Remove all applied routes"
